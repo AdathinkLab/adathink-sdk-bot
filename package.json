@@ -1,0 +1,17 @@
+{
+  "name": "adathink-sdk-bot",
+  "version": "0.0.1",
+  "description": "Sdk para probar funciones de mensajes de facebook u otras utilidades , o otros canales",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sdkbot"
+  ],
+  "author": "arsevys",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
