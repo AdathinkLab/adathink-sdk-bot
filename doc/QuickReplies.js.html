@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: QuickReplies.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: QuickReplies.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const SendFacebook = require('./SendFacebook')
+const QuickRepliesOption = require('./QuickRepliesOption') 
+
+/**
+ * @typedef {Object} RecipientFacebook
+ * @property {String} id - ID Usuario
+ */
+
+ /**
+ * @typedef {Object} MessageQuickRepliestFacebook
+ * @property {String} text - Texto del mensaje
+ * @property {Array|QuickRepliesOption} quick_replies - Opciones que se mostraran en el quick
+ */
+
+/**
+ * @typedef {Object} StructMessageQuickRepliesFacebook
+ * @property {RecipientFacebook} recipient - Recipiente al cual se le enviara el mensaje
+ * @property {MessageQuickRepliesFacebook} message - Objeto de mensaje que se enviara al usuario
+ */
+
+
+/**
+ * Crear una Respuesta Rapida
+ * @class
+ */
+class QuickReplies {
+
+    
+    
+
+    /**
+     * @constructor
+     * @param {String} id_user - ID del usuario
+     * @param {String} message - Mensaje para enviar al usuario
+     */
+    constructor(message, id_user=null){
+        this.id_user = id_user
+        this.message = message
+        this.options = []
+
+        /**
+         * @constant
+         * @member {Number}
+         */
+        this.MAX_BUTTONS = 13
+    }
+    
+    /**
+     * Remplazar el texto del mensaje de texto simple
+     * @function
+     * @param {String} message - Mensaje para enviar al usuario
+     */
+    setMessage(message){
+        this.message = message
+    }
+
+    /**
+     * Remplazar el ID del usuario del mensaje de texto simple
+     * @function
+     * @param {String} id_user - ID del usuario
+     */
+    setIdUser(id_user){
+        this.id_user = id_user
+    }
+    
+    /**
+     * Obtener el texto del mensaje de texto simple
+     * @function
+     * @returns {String} Mensaje para enviar al usuario
+     */
+    getMessage(){
+        return this.message
+    }
+
+    /**
+     * Obtener el ID del usuario del mensaje de texto simple
+     * @function
+     * @returns {String} ID del usuario
+     */
+    getIdUser(){
+        return this.id_user
+    }
+
+    /**
+     * Obtener la estructura JSON que require FACEBOOK
+     * @function
+     * @returns {StructMessageQuickRepliesFacebook} Objeto que require FACEBOOK para enviar mensaje de Quick Replies al usuario
+     */
+    getStruct(){
+        let list = this.options.map(function(quickRepliesOption){
+            if(quickRepliesOption.isTextOption())
+                return quickRepliesOption.getStructTextOption()
+            else
+                return quickRepliesOption.getStruct()
+        })
+        return {
+            "recipient": {
+                "id": this.id_user
+            },
+            "message": {
+                "text": this.message,
+                "quick_replies": list
+            }
+        }
+    }
+
+    /**
+     * Agregar una nueva opción al Quick Replies
+     * @function
+     * @param {QuickRepliesOption} option - Objecto QuickRepliesOption para agregar la lista
+     */
+    addOption(option){
+        this.options.push(option)
+    }
+
+    /**
+     * Agregar una nueva opción al Quick Replies
+     * @function
+     * @param {Array|QuickRepliesOption} list_option - Array de Objectos QuickRepliesOption para resplazar la lista
+     */ 
+    setOption(list_option){
+        this.options = list_option
+    }
+
+    /**
+     * @ignore
+     */
+    static enviar(usuario, configFB,mensaje) {
+        var msj = {
+            "recipient": {
+                "id": usuario
+            },
+            "message": {
+                "text": "",
+                "quick_replies": []
+            }
+        };
+        msj.message.text = mensaje.title;
+        for (var i = 0; mensaje.replies.length > i; i++) {
+            var rp = {
+                "content_type": "text",
+                "title": "",
+                "payload": ""
+            };
+            rp.title = mensaje.replies[i].title;
+            rp.payload = mensaje.replies[i].payload;
+            msj.message.quick_replies.push(rp);
+        }
+
+        console.log(JSON.stringify(msj));
+        SendFacebook.enviar(msj,configFB.token);
+    }
+}
+module.exports = QuickReplies;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FB.html">FB</a></li><li><a href="FBGraph.html">FBGraph</a></li><li><a href="Image.html">Image</a></li><li><a href="QuickReplies.html">QuickReplies</a></li><li><a href="QuickRepliesOption.html">QuickRepliesOption</a></li><li><a href="SendFacebook.html">SendFacebook</a></li><li><a href="Text.html">Text</a></li><li><a href="Typing.html">Typing</a></li></ul><h3>Global</h3><ul><li><a href="global.html#TYPE_EMAIL">TYPE_EMAIL</a></li><li><a href="global.html#TYPE_LOCATION">TYPE_LOCATION</a></li><li><a href="global.html#TYPE_PHONE">TYPE_PHONE</a></li><li><a href="global.html#TYPE_TEXT">TYPE_TEXT</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Jun 13 2020 01:16:30 GMT-0500 (GMT-05:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
