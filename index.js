@@ -1,7 +1,8 @@
 
-let FB=require("./FB/FB.js")
+let FB = require("./FB/FB.js")
 
-
+/** @module FB */
 module.exports = {
-	FB:FB 
+	/**Modulo para integración con facebook*/
+	...FB
 }
