@@ -1,8 +1,14 @@
 
 let FB = require("./FB/FB.js")
+let WS_GUBSHUP = require("./WS/WS_GUBSHUP.js")
 
 /** @module FB */
 module.exports = {
 	/**Modulo para integración con facebook*/
-	...FB
+	FACEBOOK:{
+		...FB
+	},
+	WS_GUBSHUP:{
+		...WS_GUBSHUP
+	}
 }
