@@ -1,6 +1,6 @@
 # Adathink Lab 
 ![Adathink Lab]
-![Image](../blob/master/images/adathink.png?raw=true)
+![Image](../master/images/adathink.png?raw=true)
 presenta  --- >  adathink-sdk-bot
 
 
