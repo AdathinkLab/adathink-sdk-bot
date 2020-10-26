@@ -30,11 +30,10 @@ app.post("/", async function(req,res){
 
 
     // Valida si el usuario envio una foto, si  tieene foto , lo descargar
-
-    //  if(FBTools.hasImage()){
-    //  let download =  await DownloadFile.syncDownload(FBTools.getImage(),{ruta:"./files",defaultName:true})
-    //     console.log(download)
-    //  }
+        if(FBTools.hasImage()){
+        let download =  await DownloadFile.syncDownload(FBTools.getImage(),{ruta:"./files",defaultName:true})
+            console.log(download)
+        }
         //Mensajes Agrupados
         FBTools.addResponse(new Typing())
         FBTools.addResponse(new Text("Hola que tal"))
