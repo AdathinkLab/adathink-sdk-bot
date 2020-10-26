@@ -69,7 +69,19 @@ class DownloadFile {
             console.log("--------------------", ruta)
             // console.log(path.basename(newUrl.pathname))
             let file = fs.createWriteStream(ruta);
-
+            var request = https.get(url, function(response) {
+                response.pipe(file);
+                file.on('finish', function() {
+                    // aqui donde termina
+                    console.log("se termino")
+                    file.close();
+                    resolve(false)
+                });
+            }).on('error', function(err) { // Handle errors
+                console.log("error")
+                resolve(true)
+                fs.unlink();
+            });
 
         })
 
