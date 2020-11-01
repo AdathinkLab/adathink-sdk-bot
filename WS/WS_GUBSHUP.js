@@ -52,10 +52,6 @@ class WS_GUBSHUP {
             this.timestamp = req["timestamp"]
             this.type_event = req["type"]
             this.payload = req["payload"]
-            // if(this.isMessageEvent()){
-            //     this.id_message_gupshup = req["context"]["gsid"]
-            //     this.id_message_whatsapp = req["context"]["id"]
-            // }
         }
 
         this.responses = []
