@@ -125,6 +125,11 @@ class WS_GUBSHUP {
         return TYPE_EVENT.MESSAGE_EVENT == this.type_event
     }
 
+    /**
+     * Validar si es un mensaje de tipo de texto
+     * @function
+     * @returns {Boolean} True si es un mensaje de texto y false si no
+     */
     isTextTypeMessage(){
         if(this.isMessage()){
             if(this.payload.type == TYPE_MESSAGE.TYPE_TEXT){
@@ -134,6 +139,11 @@ class WS_GUBSHUP {
         return false;
     }
 
+    /**
+     * Validar si es un mensaje de tipo de imagen
+     * @function
+     * @returns {Boolean} True si es un mensaje de imagen y false si no
+     */
     isImageTypeMessage(){
         if(this.isMessage()){
             if(this.payload.type == TYPE_MESSAGE.TYPE_IMAGE){
@@ -143,6 +153,11 @@ class WS_GUBSHUP {
         return false;
     }
 
+    /**
+     * Validar si es un mensaje de tipo de audio
+     * @function
+     * @returns {Boolean} True si es un mensaje de audio y false si no
+     */
     isAudioTypeMessage(){
         if(this.isMessage()){
             if(this.payload.type == TYPE_MESSAGE.TYPE_AUDIO){
@@ -152,6 +167,11 @@ class WS_GUBSHUP {
         return false;
     }
 
+    /**
+     * Validar si es un mensaje de tipo de contacto
+     * @function
+     * @returns {Boolean} True si es un mensaje de contacto y false si no
+     */
     isContactTypeMessage(){
         if(this.isMessage()){
             if(this.payload.type == TYPE_MESSAGE.TYPE_CONTACT){
@@ -161,6 +181,11 @@ class WS_GUBSHUP {
         return false;
     }
 
+    /**
+     * Validar si es un mensaje de tipo de archivo
+     * @function
+     * @returns {Boolean} True si es un mensaje de archivo y false si no
+     */
     isFileTypeMessage(){
         if(this.isMessage()){
             if(this.payload.type == TYPE_MESSAGE.TYPE_FILE){
@@ -170,6 +195,11 @@ class WS_GUBSHUP {
         return false;
     }
 
+    /**
+     * Validar si es un mensaje de tipo de ubicación
+     * @function
+     * @returns {Boolean} True si es un mensaje de ubicación y false si no
+     */
     isLocationTypeMessage(){
         if(this.isMessage()){
             if(this.payload.type == TYPE_MESSAGE.TYPE_LOCATION){
@@ -179,6 +209,11 @@ class WS_GUBSHUP {
         return false;
     }
 
+    /**
+     * Validar si es un mensaje de tipo de video
+     * @function
+     * @returns {Boolean} True si es un mensaje de video y false si no
+     */
     isVideoTypeMessage(){
         if(this.isMessage()){
             if(this.payload.type == TYPE_MESSAGE.TYPE_VIDEO){
@@ -188,6 +223,11 @@ class WS_GUBSHUP {
         return false;
     }
 
+    /**
+     * Validar si es un evento de tipo mensaje
+     * @function
+     * @returns {Boolean} True si es un evento de tipo mensaje y false si no
+     */
     isEventTypeMessage(){
         if(this.isMessage()){
             if(this.payload.type == TYPE_MESSAGE.TYPE_EVENT){
@@ -197,6 +237,11 @@ class WS_GUBSHUP {
         return false;
     }
 
+    /**
+     * Obtener el mensaje enviado por el usuario
+     * @function
+     * @returns {String} retornamos el mensajes y si no hay mensaje retornamos un NULL
+     */
     getMessage(){
         if(this.isTextTypeMessage()){
             return this.payload.payload.text;
@@ -204,6 +249,11 @@ class WS_GUBSHUP {
         return null;
     }
 
+    /**
+     * Obtener el nombre del usuario
+     * @function
+     * @returns {String} retornamos el nombre del usuarioy si no hay nombre del usuario retornamos un NULL
+     */
     getUserName(){
         if(this.isMessage()){
             return this.payload.sender.name;
@@ -211,6 +261,11 @@ class WS_GUBSHUP {
         return null;
     }
 
+    /**
+     * Obtener el celular del usuario 
+     * @function
+     * @returns {String} retornamos el celular del usuario y si no hay celular del usuario  retornamos un NULL
+     */
     getUserPhone(){
         if(this.isMessage()){
             return this.payload.sender.dial_code;
@@ -218,6 +273,11 @@ class WS_GUBSHUP {
         return null;
     }
 
+    /**
+     * Obtener el celular del usuario con codigo de pais 
+     * @function
+     * @returns {String} retornamos el celular del usuario con codigo de pais y si no se encuentra  retornamos un NULL
+     */
     getUserFullPhone(){
         if(this.isMessage()){
             return this.payload.sender.country_code + this.payload.sender.dial_code;
@@ -225,6 +285,11 @@ class WS_GUBSHUP {
         return null;
     }
 
+    /**
+     * Obtener el codigo de pais 
+     * @function
+     * @returns {String} retornamos el codigo de pais y si no se encuentra  retornamos un NULL
+     */
     getUserContryCode(){
         if(this.isMessage()){
             return this.payload.sender.country_code;
